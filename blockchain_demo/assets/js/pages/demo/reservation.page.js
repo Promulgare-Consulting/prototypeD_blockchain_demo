@@ -439,8 +439,8 @@ parasails.registerPage('reservation', {
 	  		if(parseInt(result["c"][0])>0) {
 	  			// Find name from user database
   				console.log("Find email for user ", result["c"][0]);
-	  			
-			    axios.get(`/getUserEmail?userId=2`)
+	  			var userId = result["c"][0].toString();
+			    axios.get(`/getUserEmail?userId=`+userId)
 			    .then(response => {
 	  				// JSON responses are automatically parsed.
 	  				console.log("Got email", response.data.email);
