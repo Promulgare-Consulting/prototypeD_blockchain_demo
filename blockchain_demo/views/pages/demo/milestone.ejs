@@ -1,0 +1,183 @@
+
+<div id="milestone">
+  <div class="container">
+    <h1>Milestone Smart Contract demo</h1>
+    <hr/>
+    <h3>Using a smart contract for a simple payment escrow.</h3>
+    <hr/>
+    <div class="buttons">
+      <p>
+      	  Deploy the smart contract.
+          <button class="btn btn-outline-info ml-2" @click="clickOpenDeployModalButton()">Demo</button>
+      </p>
+      <p>
+          Fund the contract.
+          <button class="btn btn-outline-info ml-2" @click="clickOpenFundModalButton()">Demo</button>
+      </p>
+      <p>
+          Payout on a milestone.
+          <button class="btn btn-outline-info ml-2" @click="clickOpenPayoutModalButton()">Demo</button>
+      </p>
+      <p>
+          Cancel the contract and return funds.
+          <button class="btn btn-outline-info ml-2" @click="clickOpenCancelModalButton()">Demo</button>
+      </p>
+    </div>
+  </div>
+
+  <modal class="example-modal" v-if="deployModalVisible" @close="closeDeployModal()" v-cloak>
+    <div class="modal-header">
+      <h2 class="modal-title">prototypeD Milestone Payments</h2>
+      <button type="button" class="modal-close-button" data-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+    	<div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+    		<div class="col-md-6 px-0">
+    			<h1 class="display-4 font-italic">Deploy smart contract</h1>
+		    	<p>Before you can use the smart contract you need to deploy it to the blockchain.</p>
+		    	<p>The source code to the smart contract is <a href="https://github.com/Promulgare-Consulting/milestones/blob/master/milestones.sol" target="_blank">here.</a></p>
+		    	<p>You can copy the smart contract to Remix to try it out. <a href="https://remix.ethereum.org" target="_blank">Remix</a></p>
+		    	<p>This contract is set up to hold funds in escrow and allow payouts to the recipient (payout account)</p>
+		    </div>
+		</div>
+		<div class="card flex-md-row mb-4 box-shadow h-md-250">
+            <div class="card-body d-flex flex-column align-items-start">
+		        <strong class="d-inline-block mb-2 text-primary">Accounts</strong>
+		        <h3 class="mb-0">
+		        	<a class="text-dark" href="#">Ethereum account</a>
+		        </h3>		
+				<p>{{yourAccount}}</p>
+		        <h3 class="mb-0">
+		            <a class="text-dark" href="#">Payout account</a>
+		        </h3>		
+				<p>{{payAccount}}</p>
+		        <h3 class="mb-0">
+		            <a class="text-dark" href="#">Contract address</a>
+		        </h3>		
+				<p>{{contractAddress}}</p>
+	     		<button class="btn btn-outline-info ml-2" @click="DeployContract()">Deploy Contract</button><br/>
+	    	 	<p><a :href="etherscanContract" target="_blank">View on Etherscan</a></p>
+			</div>
+    	 </div>
+      	<p>
+      		Status: {{status}}
+      	</p>
+
+
+    </div>
+    <div class="modal-footer flex-row-reverse justify-content-between">
+      <button type="button" data-dismiss="modal" class="btn btn-outline-info">Cancel</button>
+    </div>
+  </modal>
+
+  <modal class="example-modal" v-if="fundModalVisible" @close="closeFundModal()" v-cloak>
+    <div class="modal-header">
+      <h2 class="modal-title">prototypeD Milestone Payments</h2>
+      <button type="button" class="modal-close-button" data-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+    	<div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+    		<div class="col-md-6 px-0">
+    			<h1 class="display-4 font-italic">Fund the smart contract</h1>
+		    	<p>You can now send funds to the contract to be held in escrow.</p>
+		    	<p>This example sends .01ETH to the contract.</p>
+		    </div>
+		</div>
+		<div class="card flex-md-row mb-4 box-shadow h-md-250">
+            <div class="card-body d-flex flex-column align-items-start">
+		        <strong class="d-inline-block mb-2 text-primary">Accounts</strong>
+		        <h3 class="mb-0">
+		        	<a class="text-dark" href="#">Ethereum account balance</a>
+		        </h3>		
+				<p>{{injectedBalance}}</p>
+		        <h3 class="mb-0">
+		            <a class="text-dark" href="#">Contract address</a>
+		        </h3>		
+				<p>{{contractAddress}}</p>
+	      		<button class="btn btn-outline-info ml-2" @click="FundContract()">Fund Contract</button><br/>
+	    	 	<p><a :href="etherscanContract" target="_blank">View on Etherscan</a></p>
+			</div>
+    	 </div>
+      	<p>
+      		Status: {{status}}
+      	</p>
+
+
+    </div>
+    <div class="modal-footer flex-row-reverse justify-content-between">
+      <button type="button" data-dismiss="modal" class="btn btn-outline-info">Cancel</button>
+    </div>
+  </modal>
+
+  <modal class="example-modal" v-if="payoutModalVisible" @close="closePayoutModal()" v-cloak>
+    <div class="modal-header">
+      <h2 class="modal-title">prototypeD Milestone Payments</h2>
+      <button type="button" class="modal-close-button" data-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+    	<div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+    		<div class="col-md-6 px-0">
+    			<h1 class="display-4 font-italic">Payout milestone</h1>
+		    	<p>Now you can pay from the escrow to the contract recipient.</p>
+		    	<p>This example sends .005ETH to the recipient.</p>
+		    </div>
+		</div>
+		<div class="card flex-md-row mb-4 box-shadow h-md-250">
+            <div class="card-body d-flex flex-column align-items-start">
+		        <strong class="d-inline-block mb-2 text-primary">Accounts</strong>
+		        <h3 class="mb-0">
+		            <a class="text-dark" href="#">Contract address</a>
+		        </h3>		
+				<p>{{contractAddress}}</p>
+	      		<button class="btn btn-outline-info ml-2" @click="PayoutContract()">Payout Contract</button><br/>
+	    	 	<a :href="etherscanContract" target="_blank">View on Etherscan</a>
+		    </div>
+		</div>
+      	<p>
+      		Status: {{status}}
+      	</p>
+
+
+    </div>
+    <div class="modal-footer flex-row-reverse justify-content-between">
+      <button type="button" data-dismiss="modal" class="btn btn-outline-info">Cancel</button>
+    </div>
+  </modal>
+
+  <modal class="example-modal" v-if="cancelModalVisible" @close="closeCancelModal()" v-cloak>
+    <div class="modal-header">
+      <h2 class="modal-title">prototypeD Milestone Payments</h2>
+      <button type="button" class="modal-close-button" data-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+    	<div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+    		<div class="col-md-6 px-0">
+    			<h1 class="display-4 font-italic">Cancel the escrow</h1>
+		    	<p>Cancel the escrow and return all remaining funds to the owner.</p>
+		    </div>
+		</div>
+		<div class="card flex-md-row mb-4 box-shadow h-md-250">
+            <div class="card-body d-flex flex-column align-items-start">
+		        <strong class="d-inline-block mb-2 text-primary">Accounts</strong>
+		        <h3 class="mb-0">
+		            <a class="text-dark" href="#">Contract address</a>
+		        </h3>		
+				<p>{{contractAddress}}</p>
+	      		<button class="btn btn-outline-info ml-2" @click="CancelContract()">Cancel Contract</button><br/>
+    		 	<a :href="etherscanContract" target="_blank">View on Etherscan</a>
+		    </div>
+		</div>
+      	<p>
+      		Status: {{status}}
+      	</p>
+
+
+    </div>
+    <div class="modal-footer flex-row-reverse justify-content-between">
+      <button type="button" data-dismiss="modal" class="btn btn-outline-info">Cancel</button>
+    </div>
+  </modal>
+
+
+</div>
+<%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>

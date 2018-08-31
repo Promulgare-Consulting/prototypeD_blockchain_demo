@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>NEW_APP_NAME</title>
+    <title>prototypeD blockchain demo</title>
 
     <% /* Viewport tag for sensible mobile support */ %>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -18,7 +18,10 @@
     <% /* Auto-injected «link» tags: */ %>
     <!--STYLES-->
     <link rel="stylesheet" href="/dependencies/bootstrap-4/bootstrap-4.css">
+    <link rel="stylesheet" href="/dependencies/calendar.css">
+    <link rel="stylesheet" href="/dependencies/calendar/calendar.css">
     <link rel="stylesheet" href="/dependencies/font-awesome-4/css/font-awesome.css">
+    <link rel="stylesheet" href="/dependencies/ve-calendar/ve-calendar.css">
     <link rel="stylesheet" href="/styles/importer.css">
     <!--STYLES END-->
   </head>
@@ -26,10 +29,14 @@
   <body>
     <div id="page-wrap">
       <header id="page-header" class="navbar navbar-expand-sm navbar-dark bg-dark flex-column flex-md-row justify-content-between">
-        <a class="navbar-brand mr-0" href="/">NEW_APP_NAME</a>
+        <a class="navbar-brand mr-0" href="/">prototypeD blockchain demo</a>
         <div class="navbar-nav flex-row">
           <!-- LOGGED-IN NAVIGATION -->
           <% if(me) { %>
+          <a class="nav-item nav-link ml-2 ml-md-0 mr-2 mr-md-0" href="/payment">Payment</a>
+          <a class="nav-item nav-link ml-2 ml-md-0 mr-2 mr-md-0" href="/monitor">Monitor</a>
+          <a class="nav-item nav-link ml-2 ml-md-0 mr-2 mr-md-0" href="/milestone">Milestones</a>
+          <a class="nav-item nav-link ml-2 ml-md-0 mr-2 mr-md-0" href="/reservation">Reservation</a>
           <a class="nav-item nav-link ml-2 ml-md-0 mr-2 mr-md-0" href="/contact">Help</a>
           <!-- Only in desktop nav -->
           <div class="nav-item dropdown d-none d-sm-block">
@@ -75,14 +82,11 @@
 
       <footer id="page-footer" class="navbar navbar-light justify-content-between flex-row-reverse">
         <div class="nav">
-          <small class="nav-item"><a class="nav-link text-info" href="/contact">Contact<span class="d-none d-sm-inline"> us</span></a></small>
-          <small class="nav-item"><a class="nav-link text-info" href="/legal/terms">Terms<span class="d-none d-sm-inline"> of Use</span></a></small>
-          <small class="nav-item"><a class="nav-link text-info" href="/legal/privacy">Privacy<span class="d-none d-sm-inline"> policy</span></a></small>
           <% if(me) { %>
           <small class="nav-item"><a class="nav-link text-info" href="/logout">Sign out</a></small>
           <% } %>
         </div>
-        <small class="copy">Copyright &copy; 2018 NEW_APP_COMPANY. <br class="xs-only"/>All rights reserved.</small>
+        <small class="copy">Copyright &copy; 2018 prototypeD. <br class="xs-only"/>All rights reserved.</small>
       </footer>
     </div>
 
@@ -111,12 +115,17 @@
     <script src="/dependencies/bowser.js"></script>
     <script src="/dependencies/vue.js"></script>
     <script src="/dependencies/bootstrap-4/bootstrap-4.bundle.js"></script>
+    <script src="/dependencies/calendar/calendar.js"></script>
     <script src="/dependencies/cloud.js"></script>
     <script src="/dependencies/parasails.js"></script>
+    <script src="/dependencies/ve-calendar/ve-calendar.js"></script>
+    <script src="/dependencies/vue-clipboard.min.js"></script>
     <script src="/js/cloud.setup.js"></script>
     <script src="/js/components/ajax-button.component.js"></script>
     <script src="/js/components/ajax-form.component.js"></script>
+    <script src="/js/components/calendar-display.js"></script>
     <script src="/js/components/modal.component.js"></script>
+    <script src="/js/utilities/axios.js"></script>
     <script src="/js/utilities/open-stripe-checkout.js"></script>
     <script src="/js/pages/498.page.js"></script>
     <script src="/js/pages/account/account-overview.page.js"></script>
@@ -124,6 +133,10 @@
     <script src="/js/pages/account/edit-profile.page.js"></script>
     <script src="/js/pages/contact.page.js"></script>
     <script src="/js/pages/dashboard/welcome.page.js"></script>
+    <script src="/js/pages/demo/milestone.page.js"></script>
+    <script src="/js/pages/demo/payment.page.js"></script>
+    <script src="/js/pages/demo/reservation.page.js"></script>
+    <script src="/js/pages/demo/web3setup.js"></script>
     <script src="/js/pages/entrance/confirmed-email.page.js"></script>
     <script src="/js/pages/entrance/forgot-password.page.js"></script>
     <script src="/js/pages/entrance/login.page.js"></script>

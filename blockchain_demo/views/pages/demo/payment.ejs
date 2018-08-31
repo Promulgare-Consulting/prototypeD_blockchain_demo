@@ -1,0 +1,140 @@
+<div id="payment">
+  <div class="container">
+    <h1>Payments demo</h1>
+    <hr/>
+    <h3>Approaches to paying on a website using Ethereum.</h3>
+    <hr/>
+    <div class="buttons">
+      <p>
+      	 Pay for an item using your wallet and an Ethereum address.
+         <button class="btn btn-outline-info ml-2" @click="clickOpenAddressModalButton()">Demo</button>
+      </p>
+      <p>
+          Download <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en" target="_blank">MetaMask</a><br/>
+          Pay for an item using a Web3 wallet like MetaMask.
+          <button class="btn btn-outline-info ml-2" @click="clickOpenInjectedModalButton()">Demo</button><br/>
+      </p>
+      <p>
+          Pay for an item using a smart contract and Web3 wallet.
+          <button class="btn btn-outline-info ml-2" @click="clickOpenContractModalButton()">Demo</button>
+      </p>
+    </div>
+  </div>
+
+  <modal class="example-modal" v-if="addressModalVisible" @close="closeAddressModal()" v-cloak>
+    <div class="modal-header">
+      <h2 class="modal-title">prototypeD T-Shirt</h2>
+      <p>Buy a t-shirt using Ethereum!</p>
+      <button type="button" class="modal-close-button" data-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <h5 class="section-heading">Product</h5>
+    	<div class="product">
+    		<div class="product-image">
+    			<img v-bind:src="image">
+    		</div>
+      </div>
+ 			<div class="product-info">
+ 				<h1>{{ category }}</h1>
+        <div class="container">
+          <button v-on:click="addToCart">Add to cart</button>
+          Cart({{ cart }}) @ {{price}} Total = {{ total }}ETH 
+          </br>
+          <div class="p-3 mb-3 bg-light rounded">
+            <h4 class="font-italic">Payment</h4>
+            <input type="text" :value="ethAccount" size=47>
+            <button type="button" v-clipboard:copy="ethAccount" v-clipboard:success="onCopy" v-clipboard:error="onError">
+            Copy this address to use in your wallet</button>
+          </div>
+        </div>
+ 			</div>
+      <div class="cart">
+      </div>
+    </div>
+    <div class="modal-footer flex-row-reverse justify-content-between">
+      <button type="button" data-dismiss="modal" class="btn btn-outline-info">Cancel</button>
+    </div>
+  </modal>
+
+
+  <modal class="example-modal" v-if="injectedModalVisible" @close="closeInjectedModal()" v-cloak>
+    <div class="modal-header">
+      <h2 class="modal-title">prototypeD T-Shirt</h2>
+      <p>Buy a t-shirt using Ethereum!</p>
+      <button type="button" class="modal-close-button" data-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <h5 class="section-heading">Product</h5>
+      <div class="product">
+        <div class="product-image">
+          <img v-bind:src="image">
+        </div>
+      </div>
+      <div class="product-info">
+        <h1>{{ category }}</h1>
+        <div class="container">
+          <button v-on:click="addToCart">Add to cart</button>
+          Cart({{ cart }}) @ {{price}} Total = {{ total }}ETH 
+          </br>
+          <div class="p-3 mb-3 bg-light rounded">
+            <h4 class="font-italic">Payment</h4>
+            Wallet balance {{injectedBalance}}
+            </br>
+            <img v-bind:src="metamask" @click="sendPayment()"></br>
+            {{status}}</br>
+            <a :href="etherscan" target="_blank">View on Etherscan</a>
+          </div>
+        </div>
+      </div>
+      <div class="cart">
+      </div>
+    </div>
+    <div class="modal-footer flex-row-reverse justify-content-between">
+      <button type="button" data-dismiss="modal" class="btn btn-outline-info">Cancel</button>
+    </div>
+  </modal>
+
+
+  <modal class="example-modal" v-if="contractModalVisible" @close="closeContractModal()" v-cloak>
+    <div class="modal-header">
+      <h2 class="modal-title">prototypeD T-Shirt</h2>
+      <p>Buy a t-shirt using Ethereum!</p>
+      <button type="button" class="modal-close-button" data-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <h5 class="section-heading">Product</h5>
+      <div class="product">
+        <div class="product-image">
+          <img v-bind:src="image">
+        </div>
+      </div>
+      <div class="product-info">
+        <h1>{{ category }}</h1>
+        <div class="container">
+          <button v-on:click="addToCart">Add to cart</button>
+          Cart({{ cart }}) @ {{price}} Total = {{ total }}ETH 
+          <br/>
+          <div class="p-3 mb-3 bg-light rounded">
+            <h4 class="font-italic">Payment</h4>
+            Wallet balance {{injectedBalance}}<br/>
+            Customer ID {{customerID}}<br/>
+            Product SKU {{sku}}<br/>
+            <br/>
+            <img v-bind:src="metamask" @click="contractPayment()"></br>
+            {{status}}</br>
+            <a :href="etherscan" target="_blank">View on Etherscan</a><br/>
+            <a href="https://github.com/Promulgare-Consulting/prototypeD_payment_contract/blob/master/payment.sol" target="_blank">View smart contract</a>
+          </div>
+        </div>
+      </div>
+      <div class="cart">
+      </div>
+    </div>
+    <div class="modal-footer flex-row-reverse justify-content-between">
+      <button type="button" data-dismiss="modal" class="btn btn-outline-info">Cancel</button>
+    </div>
+  </modal>
+
+
+</div>
+<%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>
