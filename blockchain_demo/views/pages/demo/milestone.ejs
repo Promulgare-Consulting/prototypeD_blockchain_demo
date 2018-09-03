@@ -7,20 +7,20 @@
     <hr/>
     <div class="buttons">
       <p>
-      	  Deploy the smart contract.
           <button class="btn btn-outline-info ml-2" @click="clickOpenDeployModalButton()">Demo</button>
+      	  Deploy the smart contract.
       </p>
       <p>
-          Fund the contract.
           <button class="btn btn-outline-info ml-2" @click="clickOpenFundModalButton()">Demo</button>
+          Fund the contract.
       </p>
       <p>
-          Payout on a milestone.
           <button class="btn btn-outline-info ml-2" @click="clickOpenPayoutModalButton()">Demo</button>
+          Payout on a milestone.
       </p>
       <p>
-          Cancel the contract and return funds.
           <button class="btn btn-outline-info ml-2" @click="clickOpenCancelModalButton()">Demo</button>
+          Cancel the contract and return funds.
       </p>
       <p> The source code to the Payment Milestones contract is <a href="https://github.com/Promulgare-Consulting/milestones/blob/master/milestones.sol" target="_blank">here.</a>
       </p>      
@@ -34,7 +34,7 @@
     </div>
     <div class="modal-body">
     	<div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
-    		<div class="col-md-6 px-0">
+    		<div class="px-0">
     			<h1 class="display-4 font-italic">Deploy smart contract</h1>
 		    	<p>Before you can use the smart contract you need to deploy it to the blockchain.</p>
 		    	<p>The source code to the smart contract is <a href="https://github.com/Promulgare-Consulting/milestones/blob/master/milestones.sol" target="_blank">here.</a></p>
@@ -46,7 +46,7 @@
             <div class="card-body d-flex flex-column align-items-start">
 		        <strong class="d-inline-block mb-2 text-primary">Accounts</strong>
 		        <h3 class="mb-0">
-		        	<a class="text-dark" href="#">Ethereum account</a>
+		        	<a class="text-dark" href="#">Your Ethereum account</a>
 		        </h3>		
 				<p>{{yourAccount}}</p>
 		        <h3 class="mb-0">
@@ -79,7 +79,7 @@
     </div>
     <div class="modal-body">
     	<div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
-    		<div class="col-md-6 px-0">
+    		<div class="px-0">
     			<h1 class="display-4 font-italic">Fund the smart contract</h1>
 		    	<p>You can now send funds to the contract to be held in escrow.</p>
 		    	<p>This example sends .01ETH to the contract.</p>
@@ -89,7 +89,7 @@
             <div class="card-body d-flex flex-column align-items-start">
 		        <strong class="d-inline-block mb-2 text-primary">Accounts</strong>
 		        <h3 class="mb-0">
-		        	<a class="text-dark" href="#">Ethereum account balance</a>
+		        	<a class="text-dark" href="#">Your Ethereum account balance</a>
 		        </h3>		
 				<p>{{injectedBalance}}</p>
 		        <h3 class="mb-0">
@@ -118,7 +118,7 @@
     </div>
     <div class="modal-body">
     	<div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
-    		<div class="col-md-6 px-0">
+    		<div class="px-0">
     			<h1 class="display-4 font-italic">Payout milestone</h1>
 		    	<p>Now you can pay from the escrow to the contract recipient.</p>
 		    	<p>This example sends .005ETH to the recipient.</p>
@@ -153,7 +153,7 @@
     </div>
     <div class="modal-body">
     	<div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
-    		<div class="col-md-6 px-0">
+    		<div class="px-0">
     			<h1 class="display-4 font-italic">Cancel the escrow</h1>
 		    	<p>Cancel the escrow and return all remaining funds to the owner.</p>
 		    </div>
